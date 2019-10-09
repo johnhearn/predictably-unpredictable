@@ -4,11 +4,12 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Predictable Title</title>
 
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/theme/night.css">
+		<link rel="stylesheet" href="css/custom.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/monokai.css">
@@ -24,9 +25,694 @@
 	</head>
 	<body>
 		<div class="reveal">
+<!-- ====================== BETWEEN REVEAL AND SLIDES ====================== -->
+<header class="left" style="position: absolute; left: 10px;"></header>
+<header class="right" style="position: absolute; right: 10px;"></header>
+<footer class="left" style="position: absolute; left: 10px; bottom: 0;"></footer>
+<footer class="right" style="position: absolute; right: 10px; bottom: 0;"></footer>
+<footer class="center" style="position: absolute; left: 0; right: 0; bottom: 20px; text-align: center;"></footer>
+<!-- ====================== BETWEEN REVEAL AND SLIDES ====================== -->
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+
+			<section data-markdown data-background-image="img/sand_dune_ripples.jpg">
+				<textarea data-template>
+					## Predictably Unpredictable <!-- .element style="color: black" -->
+					**John Hearn** <!-- .element style="color:black" -->
+				</textarea>
+				
+			</section>
+
+			<section data-background-image="img/[scbcn19] Sponsors slide.svg">
+				<aside class="notes">
+					Work at codurance
+					based on lightning talks and internal conversations
+					thank colleagues for support and encouragement
+					learning culture
+					if you think that you'd like that, you know what to do
+					
+					Too many years in software, studied physics and philosophy
+					Apologise in advance for bad pop references
+
+
+					Before we start I'd like to ask for your help with an experiment. Could you try and start to clap together, in sync? Ok. Now I've never done this before but... I'd like *half* of you to stop clapping. OK, that's interesting. *[Do a quarter depending on response]*
+				</aside>
+			</section>
+
+
+				<section>
+					<h2>If only we could predict the future...</h2>
+					<img data-src="img/bttf2-sports-almanac.jpg" width="50%" class="plain"/>
+					
+					<aside class="notes">
+						We love certainty</u> and we're always looking for new ways to find it... and with good reason, *we think* it means we can predict the future. 
+						TDD make sure it works, Agile quick feedback, but there's more
+						We're going to start with technical, then expand horizons to get some insights 
+						then converge come back to practical
+					</aside>
+				</section>
+
+				<section>
+					<h2 style="color: yellow;">Chapter 1</h2>
+					<h4>Connections</h4>
+	
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+					### Which function depends on which?
+					```javascript
+					function aFunction() {
+						...
+						anotherFunction(a, b, c);
+					}
+					```
+					<p class="fragment fade-in">They both depend on each other.</p>
+					</textarea>
+				</section>
+				
+				<section data-state="connascence">
+					<h2>Connascence</h2>
+					<div class="row" style="width:60%; margin-left: auto; margin-right: auto;">
+						<div class="column">
+								Name <br>
+								Type  <br>
+								Meaning  <br>
+								Position <br>
+								Algorithm
+						</div>
+						<div class="column">
+								Execution <br>
+								Timing <br>
+								Value <br>
+								Identity
+						</div>
+					</div>
+
+				  <style>.connascence footer.center:after { font-size: 15pt; content: "connascence.io"; }</style>
+
+				  <aside class="notes">
+				  </aside>
+				</section>
+
+
+				<section>
+					<h3>Shared Mutable State</h3>
+					<img data-src="img/cleese-says-no.gif" class="plain fragment fade-in" style="width: 40%">
+	
+					<aside class="notes">
+					</aside>
+				</section>
+
+				
+				<section data-markdown data-state="if-considered-harmful">
+					<textarea data-template>
+						### Spot the invisible connection
+						```javascript
+						function someFunction() {
+							if ([some condition]) {
+								// do something
+							}
+							
+							// do some other stuff
+							
+							if ([same condition]) {
+								// do something else
+							}
+						}
+						```
+					</textarea>
+					
+					<style>.if-considered-harmful footer.center:after { font-size: 15pt; content: "https://www.youtube.com/watch?v=z43bmaMwagI"; }</style>
+																
+					<aside class="notes">
+					</aside>
+				</section>
+
+			<section data-state="marypop"">
+				<blockquote style="width:95%">
+				As a code base grows large, potential interactions grow exponentially, and it quickly becomes impossible to test every interaction, or even predict which interactions might cause defects.
+				</blockquote> Mary Poppendieck
+
+				<style>.marypop footer.center:after { font-size: 15pt; content: "http://www.leanessays.com/2019/07/grown-up-lean.html"; }</style>
+																
+				<aside class="notes">
+				</aside>
+			</section>
+
+				<section>
+					<h3>A simple service</h3>
+					<img data-src="img/services1.svg" style="padding: 40px; width: 60%" class="plain">
+
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h3>Split into two</h3>
+					<img data-src="img/services2.svg" style="padding: 40px; width: 60%" class="plain">
+
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h3>What could go wrong?</h3>
+					<img data-src="img/services3.svg" style="padding: 40px; width: 60%" class="plain">
+
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h3>Hidden connection</h3>
+					<img data-src="img/services4.svg" style="padding: 40px; width: 60%" class="plain">
+
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h2 style="color: yellow;">Chapter 2</h2>
+					<h4>Interactions and Loops</h4>
+	
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h3>An extra dependency</h3>
+					<img data-src="img/services5.svg" style="padding: 40px; width: 60%" class="plain">
+
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section data-state="marypop"">
+					<blockquote style="width:95%">
+					It’s easy to write bug-free code in isolation; most bugs are caused by the way one piece of correct software interacts with another piece of correct software. 
+					</blockquote> Mary Poppendieck
+
+					<style>.marypop footer.center:after { font-size: 15pt; content: "http://www.leanessays.com/2019/07/grown-up-lean.html"; }</style>
+
+					<aside class="notes">
+					</aside>
+				</section>
+		
+			<section data-state="vizceral">
+				<img data-src="img/vizceral.gif" width="90%" class="plain"/>
+				
+				<style>.vizceral footer.center:after { font-size: 15pt; content: "https://github.com/Netflix/vizceral"; }</style>
+				
+				<aside class="notes">
+				</aside>
+			</section>
+			
+			<section data-state="netflix_sre">
+				<blockquote>
+					To successfully minimize the consequences of encountering inevitable failure.
+				</blockquote> <b>Netflix resilience engineering</b>
+
+				<style>.netflix_sre footer.center:after { font-size: 15pt; content: "https:\/\/www.linkedin.com/jobs/view/sr-resilience-engineering-advocate-at-netflix-1222215926/"; }</style>
+																
+				<aside class="notes">
+				</aside>
+			</section>
+
+			<section>
+				<h3>Systems perspective</h3>
+				<div style="position:relative; width:640px; height:480px; margin:0 auto; background-color: rgba(255, 255, 255, 0.12)">
+					<img class="fragment plain" data-fragment-index="0" width="640" height="480" src="img/dependency-with-loop1.svg" style="position:absolute;top:0;left:0;background-color: transparent;" />
+					<img class="fragment plain fade-in" data-fragment-index="1" width="640" height="480" src="img/dependency-with-loop2.svg" style="position:absolute;top:0;left:0;background-color: transparent;" />
+					<img class="fragment plain fade-in" data-fragment-index="2" width="640" height="480" src="img/dependency-with-loop3.svg" style="position:absolute;top:0;left:0;background-color: transparent;" />
+					<img class="fragment plain fade-in" data-fragment-index="3" width="640" height="480" src="img/dependency-with-loop4.svg" style="position:absolute;top:0;left:0;background-color: transparent;" />
+				  </div>
+
+				<aside class="notes">
+					</aside>
+			</section>
+
+			<section>
+				<h3>Deploying to production</h3>
+				<img data-src="img/indy_deploy.gif" class="plain"/>
+
+				<aside class="notes">
+				</aside>
+			</section>
+
+			<section>
+				<h3>Release cycle</h3>
+				<img data-src="img/release-cycle.svg" style="padding: 40px; height: 60%" class="plain"/>
+
+				<aside class="notes">
+				</aside>
+			</section>
+
+
+			<section>
+				<h3>Release cycle</h3>
+				<img data-src="img/release-cycle2.svg" style="padding: 40px; height: 60%" class="plain"/>
+
+				<aside class="notes">
+				</aside>
+			</section>
+
+			<section>
+				<h3>Quality cycle</h3>
+				<img data-src="img/load-pressure-quality.svg" style="padding: 40px; height: 60%" class="plain"/>
+
+				<aside class="notes">
+				</aside>
+			</section>
+
+			<section>
+				<h3>Quality cycle</h3>
+				<img data-src="img/load-pressure-quality2.svg" style="padding: 40px; height: 60%" class="plain"/>
+
+				<aside class="notes">
+				</aside>
+			</section>
+
+			<section data-state="system-thinking">
+				<h3>Systems Thinking</h3>
+				<div class="row" style="width:90%;">
+					<div class="column">
+						<h4>Tools</h4>
+						Causal loop diagrams<br>
+						Flows and Stocks<br>
+						Archetypes<br>
+					</div>
+					<div class="column" style="border-left-color: white; border-left-style: solid; border-left-width: 2px">
+						<h4>Concepts</h4>
+						<div style="font-size:18pt">Events</div>
+						<div style="font-size:24pt">Patterns and Behaviour</div>
+						<div style="font-size:30pt">Structures</div>
+						<div style="font-size:36pt">Mental models</div>
+					</div>
+				</div>
+
+				<style>.system-thinking footer.center:after { font-size: 15pt; content: "Systems Thinking Meetup con Jaume Jornet [https://www.youtube.com/watch?v=8xqdU-FnFck]"; }</style>
+
+				<aside class="notes">
+				</aside>
+			</section>
+
+			<section data-state="lombardi">
+				<h3>Narrative structures</h3>
+				<img data-src="img/lombardi.jpg" class="plain"/>
+
+				<style>.lombardi footer.center:after { font-size: 15pt; content: "http://socks-studio.com/2012/08/22/mark-lombardi/"; }</style>
+
+				<aside class="notes">
+					Explain two points narrative structures + complexity still being a problem
+				</aside>
+			</section>
+
+
+				<section>
+					<h2>The Game of Life</h2>
+					<p>You have a grid of cells which can be alive or dead.</p>
+					<p>Any <b style="color:green">alive</b> cell touching less than two or more than three live neighbours dies.</p>
+					<p>Any <b style="color:darkslateblue">dead</b> cell touching exactly three live neighbours becomes alive.</p>
+					<p>Otherwise stay the same.</p>
+					
+					<aside class="notes">
+						As if by under or over population.
+						As if by reproduction.
+					</aside>
+				</section>
+			
+				<section data-markdown>
+					<textarea data-template>
+					```julia
+					function updateGrid(t, tnext)
+						for i in 1:resx
+							for j in 1:resy
+								num = numLiveNeighbours(t,i,j)
+								if isAlive(t,i,j) && (num < 2 || num > 3)
+									cells[tnext][i,j] = DEAD
+								elseif isDead(t,i,j) && num == 3
+									cells[tnext][i,j] = ALIVE
+								else
+									cells[tnext][i,j] = cells[t][i,j]
+								end
+							end
+						end
+					end
+					```
+					</textarea>
+				</section>
+
+				<section>
+					<img data-src="img/gol_train.gif" class="plain" width="100%"/>
+					
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section data-state="explorables">
+					<h3>Complexity Explorables</h3>
+					<img data-src="img/explorables.jpeg" style="width:70%"/>
+					
+					<style>.explorables footer.center:after { font-size: 15pt; content: "https://www.complexity-explorables.org/"; }</style>
+
+					<aside class="notes">
+					</aside>
+				</section>
+
+			<section>
+				<h3>Complexity<sup>2</sup> everywhere</h3>
+				<img data-src="img/bz-reaction.jpg" style="width:20%"/>
+				<img data-src="img/traffic_waves.gif" style="width:40%"/>
+				<img data-src="img/washboarding.jpg" style="width:30%"/>
+				<img data-src="img/vortex_street_real.gif" style="width:33%"/>
+				<img data-src="img/giants-causeway.jpg" style="width:27%"/>
+				<img data-src="img/the-sun.gif" style="width:25%"/>
+
+				<aside class="notes">
+				</aside>
+			</section>
+
+			<section data-state="neural-nets">
+				<h3>Complex<sup>2</sup> Neural Dynamics</h3>
+				<img data-src="img/neural-nets.png" style="width:95%"/>
+
+				<style>.neural-nets footer.center:after { font-size: 15pt; content: "https://www.youtube.com/watch?v=cLLQcshWEbE"; }</style>
+
+				<aside class="notes">
+				</aside>
+			</section>
+
+			<section>
+				<h2 style="color: yellow;">Chapter 3</h2>
+				<h4>Adaptive agents</h4>
+
+				<aside class="notes">
+				</aside>
+			</section>
+
+
+			<section>
+				<h3>Complex<sup></sup> adaptive systems</h3>
+				<img data-src="img/mycorrhizal-fungi.jpg" style="float: left; width:36%; margin-left: 80px"/>
+				<img data-src="img/murmuration.gif" style="width:40%"/>
+				<img data-src="img/bees.jpeg" style="width:30%"/>
+
+				<aside class="notes">
+				</aside>
+			</section>
+
+			<section data-state="spider-ballooning">
+				<h3>Exaptation</h3>
+				<img data-src="img/spiders-ballooning-title.png" style="float: left;" class="plain"/>
+				<img data-src="img/spiders-ballooning-photo.png" style="width:36%; margin-left: 250px; margin-top: -90px;"/>
+
+				<style>.spider-ballooning footer.center:after { font-size: 15pt; content: "http://bit.ly/spider-ballooning"; }</style>
+
+				<aside class="notes">
+				</aside>
+			</section>
+
+			<section data-state="mosquitos">
+				<h3>Unintended consequences...</h3>
+				<img data-src="img/mosquitos.png" style="width:95%"/>
+
+				<style>.mosquitos footer.center:after { font-size: 15pt; content: "https://www.nature.com/articles/s41598-019-49660-6"; }</style>
+
+				<aside class="notes">
+				</aside>
+			</section>
+
+			<section>
+				<h2 style="color: yellow;">Chapter 4</h2>
+				<h4>Human agents</h4>
+
+				<aside class="notes">
+				</aside>
+			</section>
+
+			<section>
+				<h3>Socio-complex<sup>c</sup> systems</h3>
+				<img data-src="img/human_network2.png" style="width:40%"/>
+
+				<aside class="notes">
+				</aside>
+			</section>
+
+			<section>
+				<img data-src="img/complexity-phd-tweet.png"/>
+
+				<aside class="notes">
+				</aside>
+			</section>
+	
+			<section data-state="hajj">
+				<h3>Socio-complex<sup>c</sup> systems</h3>
+				<img data-src="img/hajj.jpg"/>
+
+				<style>.hajj footer.center:after { font-size: 15pt; content: "https://www.nature.com/articles/s41598-019-49660-6"; }</style>
+
+				<aside class="notes">
+				</aside>
+			</section>
+
+			<section data-state="still">
+				<blockquote style="width:100%">
+					Simulation? Little dots on a screen are just one method of testing a set of assumptions. If I change the weather conditions [or] there is suddenly a loud noise or a bad smell, are your assumptions still true? ... You can’t really reduce an individual’s mind-set to an algorithm..
+				</blockquote><b>Professor Keith Still</b>
+
+				<style>.still footer.center:after { font-size: 15pt; content: "https://www.vanityfair.com/news/2018/01/the-mecca-stampede-that-made-history-hajj"; }</style>
+
+				<aside class="notes">
+				</aside>
+			</section>
+
+			<section data-state="goodharts-law">
+				<blockquote>
+					When a measure becomes a target, it ceases to be a good measure.
+				</blockquote>Charles Goodhart
+
+				<aside class="notes">
+				</aside>
+			</section>
+
+
+			<section>
+				<h3>Organisation</h3>
+				<img data-src="img/hierarchy-org.svg" style="width:40%"/>
+    
+				<aside class="notes">
+					Add constraints
+				</aside>
+			</section>
+
+
+			<section data-state="system-is-not-tree">
+				<blockquote>
+					A system is not a tree.
+				</blockquote>Kevlin Henney
+
+				<style>.system-is-not-tree footer.center:after { font-size: 15pt; content: "https://www.youtube.com/watch?v=ARkLVvtxUZI"; }</style>
+
+				<aside class="notes">
+				</aside>
+			</section>
+
+
+			<section data-state="individuals-over-interactions">
+				<blockquote>
+					Individuals and interactions <br><small>over processes and tools</small>
+				</blockquote>
+
+				<style>.individuals-over-interactions footer.center:after { font-size: 15pt; content: "https://agilemanifesto.org/"; }</style>
+
+				<aside class="notes">
+				</aside>
+			</section>
+
+			<section>
+				<h3>Real Organisation</h3>
+				<img data-src="img/network-org.svg" style="width:40%"/>
+
+				<aside class="notes">
+				</aside>
+			</section>
+
+
+			<section>
+				<h3>Self-organisation</h3>
+
+				<aside class="notes">
+					Reference clapping
+					Green button
+				</aside>
+			</section>
+
+
+			<section data-state="netflix_sre">
+				<h3>Netflix again...</h3>
+				<blockquote>
+					Netflix as a <b>socio-technical</b> system is formed from the interaction of people and software. ... Unforseen interactions are common and operational surprises arise from perfect storms of events.
+				</blockquote> 
+
+				<style>.netflix_sre footer.center:after { font-size: 15pt; content: "https:\/\/www.linkedin.com/jobs/view/sr-resilience-engineering-advocate-at-netflix-1222215926/"; }</style>
+
+				<aside class="notes">
+				</aside>
+			</section>
+
+			<section data-state="thecube">
+				<h3>Where's the master plan?</h3>
+				<img data-src="img/the-cube.jpg" class="plain">
+
+				<aside class="notes">
+				</aside>
+			</section>
+
+
+			<section>
+				<h2 style="color: yellow;">Chapter 5</h2>
+				<h4>Navigating uncertainty</h4>
+
+				<aside class="notes">
+				</aside>
+			</section>
+
+			<section data-state="navigating">
+				<blockquote>
+					How do individuals and organizations win in an uncertain environment?
+				</blockquote>
+
+				<style>.navigating footer.center:after { font-size: 15pt; content: "https://taylorpearson.me/ooda-loop/"; }</style>
+				
+				<aside class="notes">
+				</aside>
+			</section>
+
+
+			<section data-state="ooda">
+				<h3>John Boyd's OODA loop</h3>
+				<img data-src="img/ooda-loop.svg" style="padding: 40px;" class="plain">
+
+				<style>.ooda footer.center:after { font-size: 15pt; content: "https://en.wikipedia.org/wiki/OODA_loop"; }</style>
+				
+				<aside class="notes">
+				</aside>
+			</section>
+
+			<section data-state="pst">
+				<h3>Simon Wardley's PST</h3>
+				<div>
+					<b>Pioneer</b>
+					<div>Novelty and experiment</div>
+				</div><br>
+				<div>
+					<b>Settler</b>
+					<div>Refine and build</div>
+				</div><br>
+				<div>
+					<b>Town Planner</b>
+					<div>Improve and industrialise</div>
+				</div><br>
+
+				<style>.pst footer.center:after { font-size: 15pt; content: "https://blog.gardeviance.org/2015/04/the-only-structure-youll-ever-need.html"; }</style>
+				
+				<aside class="notes">
+					Individual personalities, consider during hiring
+					For pioneers safe-to-fail is a given
+				</aside>
+			</section>
+
+			<section data-state="tri">
+				<h3>Kent Beck's</h3>
+				<h4>Software Development Triathlon (3X)</h4>
+				<div style="display: flex; justify-content: flex-start;">
+					<img data-src="img/3x.png" style="width:40%; padding: 40px;" class="plain"/>
+					<div style="text-align: left; margin-left: 15%;">
+						<div style="padding-top: 40px;"><b>Explore</b></div>
+						<div style="padding-top: 40px;"><b>Expand</b></div>
+						<div style="padding-top: 40px;"><b>Extract</b></div>
+					</div>
+				</div>
+
+				<style>.tri footer.center:after { font-size: 15pt; content: "https://www.facebook.com/notes/kent-beck/the-product-development-triathlon/1215075478525314/"; }</style>
+				
+				<aside class="notes">
+				</aside>
+			</section>
+
+
+			<section data-state="cynefin">
+				<h3>Cynefin Framework</h3>
+				<img data-src="img/Cynefin.png" width="52%"" class="plain"/>
+
+				<style>.cynefin footer.center:after { font-size: 15pt; content: "Dave Snowden [CC BY-SA 3.0], via Wikimedia Commons"; }</style>
+
+				<aside class="notes">
+				</aside>
+			</section>
+
+			<section data-state="anecdote-circles">
+				<h3>Anecdote Circles</h3>
+				<div>Gather personal anecdotes</div>
+				<div>Synthesise</div>
+				<div>Consider impacts</div>
+				<div>Decide actions/interventions</div>
+
+				<style>.anecdote-circles footer.center:after { font-size: 15pt; content: "https://cognitive-edge.com/methods/anecdote-circles/"; }</style>
+
+				<aside class="notes">
+				</aside>
+			</section>
+
+			<section>
+				<h2 style="color: yellow;">Epilogue</h2>
+
+				<aside class="notes">
+					Connections
+					Interactions
+					Emergence
+					Unintended consequences
+					Safe-to-fail
+					Self-organisation
+					Agile has done something but we can do more
+				</aside>
+			</section>
+
+
+			<section>
+				<div>Complexity as <b>complicated</b></div>
+				<div class="fragment">Complexity as <b>unanticipated</b></div>
+				<div class="fragment">Complexity as <b>unpredictable</b></div>
+				<div class="fragment">Complexity as <b>opportunity</b></div>
+				<aside class="notes">
+						complicated (analysis, refactoring, good practices, experience)
+						unanticipated (robustness/resilience, inevitable surprise)
+						unpredictable (safe-to-fail, experimentation, design for serendipity)
+						adaptation (ritual, novelty, anti-fragile)
+						<b>future of agility</b>
+						<b>catalyst for novelty, innovation and resilience</b> (when conditions right)
+				</aside>
+			</section>
+	
+			<section>
+				<blockquote style="width: 80%">
+					Uncertainty is an uncomfortable position. But certainty is an absurd one. 
+				</blockquote> Voltaire
+
+				<aside class="notes">
+				</aside>
+			</section>
+	
+			<section>
+				<h2 style="color: yellow;">The End</h2>
+				<h4>@johnhearnbcn</h4>
+
+				<aside class="notes">
+				</aside>
+			</section>
+
 			</div>
 		</div>
 
@@ -37,6 +723,14 @@
 			// - https://github.com/hakimel/reveal.js#configuration
 			// - https://github.com/hakimel/reveal.js#dependencies
 			Reveal.initialize({
+				hash: true,
+				controls: false,
+				controlsTutorial: false,
+				transition: 'none', // none/fade/slide/convex/concave/zoom
+				transitionSpeed: 'fast',
+				defaultTiming: 60,
+				pdfSeparateFragments: false,
+				pdfMaxPagesPerSlide: 1,
 				dependencies: [
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
